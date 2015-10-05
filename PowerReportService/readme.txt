@@ -1,0 +1,2 @@
+﻿The PowerReportService can be run from within visual studio by running or debugging the PowerReportService project.
+Alternatively the window service can be installed by running the install.cmd from the bin\debug or release directorties using a visual studio commmand prompt running as Admin.
