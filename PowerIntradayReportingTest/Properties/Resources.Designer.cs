@@ -61,12 +61,31 @@ namespace PowerIntradayReportingTest.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Local Time, Volume
-        ///23:00, 0
-        ///00:00, 10
-        ///01:00, 20
-        ///02:00, 30
-        ///03:00, 40.
+        ///   Looks up a localized string similar to Local Time,Volume
+        ///23:00,0
+        ///00:00,10
+        ///01:00,20
+        ///02:00,30
+        ///03:00,40
+        ///04:00,50
+        ///05:00,60
+        ///06:00,70
+        ///07:00,80
+        ///08:00,90
+        ///09:00,100
+        ///10:00,110
+        ///11:00,120
+        ///12:00,130
+        ///13:00,140
+        ///14:00,150
+        ///15:00,160
+        ///16:00,170
+        ///17:00,180
+        ///18:00,190
+        ///19:00,200
+        ///20:00,210
+        ///21:00,220
+        ///22:00,230.
         /// </summary>
         internal static string ExpectedContent {
             get {

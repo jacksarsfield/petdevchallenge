@@ -38,10 +38,10 @@ namespace PowerIntradayReporting
             // added a retry to the powerservice as this is an external call and not something we have control over
             // retry could be changed to catch specific exceptions
             var trades = new RetryBlock<IList<PowerTrade>>(() => _powerService.GetTrades(dates.RequestDate).ToList())
-            .WithMaxRetries(3)
-            .WithWaitBetweenRetries(1000)
-            .WithActionBetweenRetries(() => _log.Warn(("Retrying after error during GetTrades")))
-            .Execute();
+                .WithMaxRetries(3)
+                .WithWaitBetweenRetries(1000)
+                .WithActionBetweenRetries(() => _log.Warn(("Retrying after error during GetTrades")))
+                .Execute();
 
             _log.InfoFormat("{0} trade returned", trades.Count);
 

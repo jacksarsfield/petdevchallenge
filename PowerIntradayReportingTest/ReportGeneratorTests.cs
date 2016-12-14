@@ -49,7 +49,7 @@ namespace PowerIntradayReportingTest
             _powerTradeOne = new PowerTrade();
             _powerTradeTwo = new PowerTrade();
             _powerTrades = new[] { _powerTradeOne, _powerTradeTwo };
-            _powerPosition = new PowerPosition();
+            _powerPosition = new PowerPosition(_dates.RequestDate);
             _fileName = "PowerPositions.csv";
             _content = "Local time, Volume etc";
 

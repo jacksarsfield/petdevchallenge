@@ -20,7 +20,7 @@ namespace PowerIntradayReportingTest
         public void WillWriteAStringRepresentingThePosition()
         {
             var extractTime = new DateTime(2015, 5, 12);
-            var position = new PowerPosition(extractTime, 5);
+            var position = new PowerPosition(extractTime);
             for (int i = 0; i < position.Periods.Length; i++)
             {                
                 position.Periods[i].Volume = 10 * i;

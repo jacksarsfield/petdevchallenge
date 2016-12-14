@@ -1,21 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
+using PowerIntradayReporting.Constant;
 
 namespace PowerIntradayReporting.Model
 {
     public class PowerPosition
     {
-        public PowerPosition()
-        { }
-
-        public PowerPosition(DateTime date, int numberOfPeriods)
+        public PowerPosition(DateTime date)
         {
+            var tzi = TimeZoneInfo.FindSystemTimeZoneById(ReportConstants.GmtStandardTime);
+
             Date = date;
-            var start = date.AddHours(-1);
+            var start = TimeZoneInfo.ConvertTimeToUtc(date.AddHours(-1), tzi);
+            var end = TimeZoneInfo.ConvertTimeToUtc(date.AddHours(-1).AddDays(1), tzi);
+
             var periods = new List<PowerPositionPeriod>();
-            for (int i = 0; i < numberOfPeriods; i++)
+            while(start < end)
             {
-                periods.Add(new PowerPositionPeriod { PeriodDateTime = start, Volume = 0 });
+                periods.Add(new PowerPositionPeriod { PeriodDateTime = TimeZoneInfo.ConvertTimeFromUtc(start, tzi) });
                 start = start.AddHours(1);
             }
 
