@@ -35,12 +35,12 @@ namespace PowerIntradayReporting
             var dates = _dateCalculator.Calculate();
             _log.InfoFormat("Report ExtractDateTime: {0}, PowerService request date: {1}", dates.ExtractDateTime, dates.RequestDate);
 
-            // added a retry to the powerservice as this is an external call and not something we have control over
+            // added a retry to the power service as this is an external call and not something we have control over
             // retry could be changed to catch specific exceptions
             var trades = new RetryBlock<IList<PowerTrade>>(() => _powerService.GetTrades(dates.RequestDate).ToList())
                 .WithMaxRetries(3)
                 .WithWaitBetweenRetries(1000)
-                .WithActionBetweenRetries(() => _log.Warn(("Retrying after error during GetTrades")))
+                .WithActionBetweenRetries(ex => _log.Warn(($"Retrying after error during GetTrades, exception: {ex}")))
                 .Execute();
 
             _log.InfoFormat("{0} trade returned", trades.Count);

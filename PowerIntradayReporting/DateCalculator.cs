@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Runtime.Remoting.Messaging;
 using Core;
 using PowerIntradayReporting.Constant;
 using PowerIntradayReporting.Model;

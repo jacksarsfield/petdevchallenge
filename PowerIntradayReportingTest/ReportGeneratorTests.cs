@@ -80,11 +80,12 @@ namespace PowerIntradayReportingTest
         [TestMethod]
         public void WillRetryAndContinueLoggingAWarningIfPowerServiceThrowsException()
         {
-            _powerService.GetTrades(_dates.RequestDate).Returns(x => { throw new Exception("Error on 1st call"); }, x => _powerTrades);
+            var exception = new Exception("Error on 1st call");
+            _powerService.GetTrades(_dates.RequestDate).Returns(x => { throw exception; }, x => _powerTrades);
 
             _reportGenerator.Generate(_reportFolder);
 
-            _log.Received(1).Warn("Retrying after error during GetTrades");
+            _log.Received(1).Warn($"Retrying after error during GetTrades, exception: {exception}");
             _file.Received(1).WriteAllText(_reportFolder + _fileName, _content);
         }
     }

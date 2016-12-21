@@ -6,7 +6,7 @@ namespace Core
     public class RetryBlock<T>
     {
         private readonly Func<T> _function;
-        private Action _waitAction;
+        private Action<Exception> _waitAction;
 
         public RetryBlock(Func<T> function)
         {
@@ -44,7 +44,7 @@ namespace Core
             return this;
         }
 
-        public RetryBlock<T> WithActionBetweenRetries(Action waitAction)
+        public RetryBlock<T> WithActionBetweenRetries(Action<Exception> waitAction)
         {
             _waitAction = waitAction;
             return this;
@@ -59,7 +59,7 @@ namespace Core
                 {
                     return _function.Invoke();
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
                     if (++attempts > MaxRetries)
                     {
@@ -70,7 +70,7 @@ namespace Core
                     {
                         if (_waitAction != null)
                         {
-                            _waitAction.Invoke();
+                            _waitAction.Invoke(ex);
                         }
 
                         Thread.Sleep(WaitTime);
